@@ -7,7 +7,7 @@ import os
 
 # import base class
 from rvdata.core.models.level3 import RV3
-# from rvdata.core.models.definitions import LEVEL3_EXTENSIONS
+from rvdata.core.models.definitions import LEVEL3_EXTENSIONS
 from rvdata.core.tools import stitch_spectrum
 
 
@@ -53,6 +53,11 @@ class NEIDRV3(RV3):
     """
 
     def _read(self, hdul2: fits.HDUList, **kwargs) -> None:
+        # create required Level 3 extensions
+        for i, row in LEVEL3_EXTENSIONS.iterrows():
+            # TODO: set description and comment
+            if row["Name"] not in self.extensions.keys():
+                self.create_extension(row["Name"], row["DataType"])
 
         # read the wavelength, flux, and blaze data
         sci_flx = hdul2["SCIFLUX"].data  # 4-116 order in NEID out of 122
@@ -67,6 +72,7 @@ class NEIDRV3(RV3):
         # save the stitched spectrum
         self.set_data("STITCHED_CORR_TRACE1_FLUX", st_flux)
         self.set_data("STITCHED_CORR_TRACE1_WAVE", st_wave)
+        print(type(st_wave))
 
         # set the primary header
         hmap_path = os.path.join(os.path.dirname(__file__), "config/header_map.csv")
@@ -94,7 +100,7 @@ class NEIDRV3(RV3):
         # self.set_header("RECEIPT", OrderedDict(hdul2["RECEIPT"].header))
         # self.set_data("RECEIPT", Table(hdul2["RECEIPT"].data).to_pandas())
 
-        # all_exts = list(self.extensions.keys())
-        # for ext_name in all_exts:
-        #     if ext_name not in LEVEL3_EXTENSIONS["Name"].values:
-        #         self.del_extension(ext_name)
+        all_exts = list(self.extensions.keys())
+        for ext_name in all_exts:
+            if ext_name not in LEVEL3_EXTENSIONS["Name"].values:
+                self.del_extension(ext_name)
