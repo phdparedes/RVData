@@ -72,7 +72,6 @@ class NEIDRV3(RV3):
         # save the stitched spectrum
         self.set_data("STITCHED_CORR_TRACE1_FLUX", st_flux)
         self.set_data("STITCHED_CORR_TRACE1_WAVE", st_wave)
-        print(type(st_wave))
 
         # set the primary header
         hmap_path = os.path.join(os.path.dirname(__file__), "config/header_map.csv")
