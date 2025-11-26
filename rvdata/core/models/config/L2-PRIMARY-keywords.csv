@@ -35,7 +35,7 @@ CZ1 ... CZ#,Catalog Z for for object in trace 1 to #,N/A,Float,0.00000454,'',N,"
 CCLRN1 ... CCLRN#,Catalog color 1 - color 2 name for object in trace 1 to #,N/A,String,"Gaia B-R",'',N,"Can be expanded to multiple keywords indexed 1 to #"
 CCLR1 ... CCLR#,Catalog color 1 - color 2 for object in trace 1 to #,mag,Float,0.47,'',N,"Can be expanded to multiple keywords indexed 1 to #"
 OBSERVAT,Observatory name,N/A,String,KPNO,UNKNOWN,Y,
-TELESCOP,Telescope name,N/A,String,"ESO-VLT-U1234" "WIYN" or "NEIDSOLARFEED",UNKNOWN,Y,For solar observations - if solarfeed has its own name use that otherwise use an instrument + solarfeed type entry
+TELESCOP,Telescope name,N/A,String,"ESO-VLT-U1234 WIYN or NEIDSOLARFEED",UNKNOWN,Y,"For solar observations - if solarfeed has its own name use that otherwise use an instrument + solarfeed type entry"
 NUMTEL,Number of telescopes used in the observation,N/A,UInt,1,UNDEFINED,Y,
 TELEID1 ... TELEID#,Labels for telescopes as indexed in TCS keywords,N/A,String,"ESO-VLT-U1",UNKNOWN,Y,		
 GEOSYS,Coordinate system for observatory / telesccope location,N/A,String,"GRS80",UNKNOWN,Y,																																																					
