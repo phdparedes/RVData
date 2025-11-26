@@ -84,8 +84,8 @@ EXSNR1 ... EXSNR#,Extracted signal-to-noise at EXSNRW1 to EXSNRW#,SNR/1-D pixel,
 EXSNRW1 ... EXSNRW#,Wavelength at which EXTSNR1 to EXTSNR# is measured,Angstroms,FLOAT,5530,'',N,"Can be expanded to multiple keywords indexed 1 to #; Meant to be a set of useful SNR checks, not one for every order"
 FULLCOMP,Is this file fully compliant with the RVSTAND EPRV standard?,N/A,String,"Yes or No",UNKNOWN,Y,
 TELFLAG,Issues with observatory or telescope?,N/A,String,"Pass or Fail or Warn","PASS",N,"Default to 'Pass'. If 'Fail' or 'Warn' then more detail should be provided via the bitfields"
-INSTFLAG,Issues with instrument?,N/A,String,"Pass or Fail or Warn","PASS",N,"Default to 'Pass'. If 'Fail' or 'Warn' then more detail should be provided via the bitfieldsx"
-DRPFLAG,Issues with pipeline?,N/A,String,"Pass or Fail or Warn",'"PASS",N,"Default to 'Pass'. If 'Fail' or 'Warn' then more detail should be provided via the bitfields"
+INSTFLAG,Issues with instrument?,N/A,String,"Pass or Fail or Warn","PASS",N,"Default to 'Pass'. If 'Fail' or 'Warn' then more detail should be provided via the bitfields"
+DRPFLAG,Issues with pipeline?,N/A,String,"Pass or Fail or Warn","PASS",N,"Default to 'Pass'. If 'Fail' or 'Warn' then more detail should be provided via the bitfields"
 ADDFLAG,Additional team defined flag,N/A,String,"Pass or Fail or Warn",'',N,"Note what this corresponds to in documentation"
 OBSFLAG,Observer pass/fail for exposure,N/A,String,"Pass or Fail",'',N,
 SUMMFLAG,Summary roll up of other flag keywords,N/A,String,"Pass or Fail",UNKNOWN,Y,
