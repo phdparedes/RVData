@@ -3,5 +3,5 @@ BLZCORR,Has stellar SED been removed?,N/A,Boolean,TRUE,N,,N,Y,default is to do t
 LMPCORR,Has lamp SED been removed?,N/A,Boolean,FALSE,N,,N,Y,default is NOT to do this in L3
 SEDCORR,Has stellar SED been removed?,N/A,Boolean,FALSE,N,,N,Y,default is NOT to do this in L3
 INTERPMD,interpolation method used to resample input spectrum onto the velocity scale,N/A,String,BINDENSITY,,,,,default is to use bindensity code from JB Delisle
-FLXNRMMD,flux normalization method,N/A,String,None,,,,,default is None but include so that other extensions can populate"
+FLXNRMMD,flux normalization method,N/A,String,None,,,,,default is None but include so that other extensions can populate
 DISPCORR,Has wavelength dispersion been corrected?,N/A,Boolean,TRUE,,,,,default is to correct dispersion
