@@ -1,6 +1,6 @@
 import numpy as np
 from astropy import units as u
-from specutils import Spectrum1D
+from specutils import Spectrum
 from specutils.manipulation import FluxConservingResampler
 from scipy.interpolate import interp1d
 
@@ -130,10 +130,10 @@ def resample_flux_conserving(sci_wav, sci_dflx, spec_mask, nbins):
     norders = sci_wav.shape[0]
     orders = []
     for iorder in range(norders):
-        wave = sci_wav[iorder, :] * u.AA
+        wave = sci_wav[iorder, :] * u.angstrom
         flux = sci_dflx[iorder, :] * u.Unit("adu")  # or the correct unit
         mask = spec_mask[iorder, :]  # boolean mask for NaNs or bad pixels
-        orders.append(Spectrum1D(spectral_axis=wave, flux=flux, mask=mask))
+        orders.append(Spectrum(spectral_axis=wave, flux=flux, mask=mask))
 
     # Define a common output grid
 
