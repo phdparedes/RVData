@@ -9,8 +9,8 @@ import numpy as np
 import pandas as pd
 
 import rvdata.core.models.base
-import rvdata.core.models.level2
 from rvdata.core.models.definitions import LEVEL3_EXTENSIONS
+from rvdata.core.models.definitions import LEVEL3_PRIMARY_KEYWORDS
 
 
 class RV3(rvdata.core.models.base.RVDataModel):
@@ -37,6 +37,38 @@ class RV3(rvdata.core.models.base.RVDataModel):
         if "Comments" in ext_descript.columns:
             ext_descript = ext_descript.drop(columns=["Comments"])
         self.set_data("EXT_DESCRIPT", ext_descript)
+
+        # Append Level 3 primary keywords
+        phead = self.headers['PRIMARY']
+        for i, row in LEVEL3_PRIMARY_KEYWORDS.iterrows():
+            lvl_pkey = row["Keyword"]
+            if lvl_pkey in phead.keys():
+                if pd.notnull(phead[lvl_pkey]):
+                    lvl_pvalue = phead[lvl_pkey]
+                else:
+                    lvl_pvalue = row["Default"]
+            else:
+                lvl_pvalue = row["Default"]
+            
+            try:
+                if row["Data type"].lower() == "uint":
+                    phead[lvl_pkey] = int(lvl_pvalue)
+                elif row["Data type"].lower() == "float":
+                    phead[lvl_pkey] = float(lvl_pvalue)
+                elif row["Data type"].lower() == "string":
+                    phead[lvl_pkey] = str(lvl_pvalue)
+                elif row["Data type"].lower() == "double":
+                    phead[lvl_pkey] = np.float64(lvl_pvalue)
+                elif row["Data type"].lower() == "boolean":
+                    phead[lvl_pkey] = eval(lvl_pvalue.capitalize())
+                else:
+                    print(f"Unknown type {row['Data type']} for keyword {lvl_pkey}")
+            except (TypeError, AttributeError, ValueError):
+                print(
+                    f"Cannot convert value {lvl_pvalue} for keyword {lvl_pkey} to type {row['Data type']}"
+                )
+        self.set_header("PRIMARY", phead)
+
 
     def _read(self, hdul: fits.HDUList) -> None:
         l3_ext = LEVEL3_EXTENSIONS.set_index("Name")
