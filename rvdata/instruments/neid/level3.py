@@ -1,9 +1,10 @@
 from astropy.io import fits
-# from astropy.table import Table
-# import numpy as np
+from astropy.table import Table
+import numpy as np
 import pandas as pd
 import os
-# from collections import OrderedDict
+from collections import OrderedDict
+import warnings
 
 # import base class
 from rvdata.core.models.level3 import RV3
@@ -53,11 +54,6 @@ class NEIDRV3(RV3):
     """
 
     def _read(self, hdul2: fits.HDUList, **kwargs) -> None:
-        # create required Level 3 extensions
-        for i, row in LEVEL3_EXTENSIONS.iterrows():
-            # TODO: set description and comment
-            if row["Name"] not in self.extensions.keys():
-                self.create_extension(row["Name"], row["DataType"])
 
         # read the wavelength, flux, and blaze data
         sci_flx = hdul2["SCIFLUX"].data  # 4-116 order in NEID out of 122
@@ -68,10 +64,10 @@ class NEIDRV3(RV3):
         st_wave, st_flux = stitch_spectrum.stitch_orders(
             sci_wav, sci_flx, sci_blz, inst_stitch_config_sel="NEID"
         )
-
+        
         # save the stitched spectrum
-        self.set_data("STITCHED_CORR_TRACE1_FLUX", st_flux)
-        self.set_data("STITCHED_CORR_TRACE1_WAVE", st_wave)
+        self.set_data("COMBINED_STITCHED_CORR_FLUX", st_flux)
+        self.set_data("COMBINED_STITCHED_CORR_WAVE", st_wave)
 
         # set the primary header
         hmap_path = os.path.join(os.path.dirname(__file__), "config/header_map.csv")
